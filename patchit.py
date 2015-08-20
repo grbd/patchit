@@ -193,6 +193,9 @@ class PatchSetReader(object):
         if not self._active_patch:
             raise PatchSyntaxError('Missing current patch')
 
+        if hunk_dict['a2'] == None: hunk_dict['a2'] = 0
+        if hunk_dict['b2'] == None: hunk_dict['b2'] = 0
+
         a_range = (int(hunk_dict['a1']), int(hunk_dict['a2']), )
         b_range = (int(hunk_dict['b1']), int(hunk_dict['b2']), )
         self._active_hunk = Hunk(a_range, b_range, hunk_dict.get('comment'))
